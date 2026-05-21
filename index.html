@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>India Air Quality</title>
+<meta name="description" content="Daily PM2.5 readings for ten Indian cities, refreshed automatically.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127755;</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>India Air Quality</h1>
+    <p class="sub">PM2.5 across ten cities &middot; updated <time id="updated">&mdash;</time></p>
+  </div>
+  <button id="theme" class="ghost" type="button" aria-label="Switch colour theme">Theme</button>
+</header>
+
+<main id="app" class="viz-root">
+
+  <section class="lede" aria-labelledby="lede-h">
+    <h2 id="lede-h" class="sr-only">Headline readings</h2>
+    <div class="hero">
+      <p class="label">Worst air right now</p>
+      <p class="hero-value"><span id="hero-num">&mdash;</span> <span class="unit">&micro;g/m&sup3;</span></p>
+      <p class="hero-meta"><span id="hero-city">&mdash;</span> &middot; <span id="hero-band">&mdash;</span></p>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="card" aria-labelledby="now-h">
+    <h2 id="now-h">Current PM2.5 by city</h2>
+    <p class="note">Most recent hourly reading. Colour and label both carry the band.</p>
+    <div id="bars" class="chart"></div>
+    <ul class="scale-legend" id="band-legend"></ul>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>Readings from the <a href="https://open-meteo.com/">Open-Meteo</a> air quality API. Refreshed daily by a scheduled workflow.</p>
+  <p>Bands follow simplified CPCB breakpoints for PM2.5: good &le;30, moderate 30&ndash;60, poor 60&ndash;120, severe &gt;120 &micro;g/m&sup3;.</p>
+</footer>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>
