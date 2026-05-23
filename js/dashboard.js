@@ -22,7 +22,15 @@
     return n;
   };
 
+  const fmtDay = iso => {
+    const [y, m, d] = iso.split('-');
+    return new Date(Date.UTC(+y, +m - 1, +d))
+      .toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  };
+
   let latest = null;
+  let history = null;
+  let days = 90;
 
   // ---------------------------------------------------------------- tooltip
 
@@ -210,12 +218,179 @@
     });
   }
 
+  // ---------------------------------------------------------------- trends
+
+  function renderTrends() {
+    const host = document.getElementById('trends');
+    host.textContent = '';
+
+    const names = Object.keys(history.cities).sort();
+    const series = names.map(name => {
+      const entries = Object.entries(history.cities[name]).sort((a, b) => a[0] < b[0] ? -1 : 1);
+      return { name, points: entries.slice(-days) };
+    }).filter(s => s.points.length > 1);
+
+    // one shared scale so the panels compare directly
+    const max = Math.max(...series.flatMap(s => s.points.map(p => p[1])));
+    const top = Math.max(20, Math.ceil(max / 10) * 10);
+    const color = paint('--series-1');
+
+    for (const s of series) {
+      const w = 236, h = 100, padT = 16, padB = 18, padR = 10, padL = 4;
+      const plotH = h - padT - padB;
+      const plotW = w - padL - padR;
+      const n = s.points.length;
+      const x = i => padL + (i / (n - 1)) * plotW;
+      const y = v => padT + plotH - (v / top) * plotH;
+
+      const facet = document.createElement('div');
+      facet.className = 'facet';
+
+      const title = document.createElement('h3');
+      title.textContent = s.name;
+      const now = document.createElement('span');
+      now.className = 'now';
+      const lastVal = s.points[n - 1][1];
+      now.textContent = `${lastVal.toFixed(1)} µg/m³ latest`;
+      title.appendChild(document.createTextNode(' '));
+      facet.append(title, now);
+
+      const svg = el('svg', { width: '100%', height: h, viewBox: `0 0 ${w} ${h}`, role: 'img' });
+      svg.setAttribute('aria-label', `${s.name} daily PM2.5 over the last ${n} days`);
+
+      svg.appendChild(el('line', { x1: padL, x2: w - padR, y1: y(0), y2: y(0), class: 'axisline' }));
+      svg.appendChild(el('line', { x1: padL, x2: w - padR, y1: y(top), y2: y(top), class: 'gridline' }));
+
+      const tick = el('text', { x: padL + 2, y: y(top) + 12, class: 'tick' });
+      tick.textContent = top;
+      svg.appendChild(tick);
+
+      const d = s.points.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(' ');
+      svg.appendChild(el('path', {
+        d, fill: 'none', stroke: color, 'stroke-width': 2,
+        'stroke-linejoin': 'round', 'stroke-linecap': 'round'
+      }));
+
+      // endpoint marker with a surface ring so it stays legible over the line
+      svg.appendChild(el('circle', {
+        cx: x(n - 1), cy: y(lastVal), r: 4.5,
+        fill: color, stroke: 'var(--surface-1)', 'stroke-width': 2
+      }));
+
+      const crosshair = el('line', {
+        y1: padT, y2: padT + plotH, class: 'gridline', opacity: 0
+      });
+      svg.appendChild(crosshair);
+
+      const hit = el('rect', {
+        x: padL, y: padT, width: plotW, height: plotH,
+        fill: 'transparent', tabindex: '0'
+      });
+
+      const move = ev => {
+        const box = svg.getBoundingClientRect();
+        const rel = ((ev.clientX - box.left) / box.width) * w;
+        let i = Math.round(((rel - padL) / plotW) * (n - 1));
+        i = Math.max(0, Math.min(n - 1, i));
+        const [day, value] = s.points[i];
+        crosshair.setAttribute('x1', x(i));
+        crosshair.setAttribute('x2', x(i));
+        crosshair.setAttribute('opacity', 1);
+        showTip(ev.clientX, ev.clientY, [
+          { text: `${value.toFixed(1)} µg/m³`, strong: true },
+          { text: `${s.name} · ${fmtDay(day)}`, color }
+        ]);
+      };
+
+      hit.addEventListener('pointermove', move);
+      hit.addEventListener('pointerleave', () => {
+        crosshair.setAttribute('opacity', 0);
+        hideTip();
+      });
+      hit.addEventListener('focus', () => {
+        const [day, value] = s.points[n - 1];
+        const box = svg.getBoundingClientRect();
+        showTip(box.left + box.width / 2, box.top + 20, [
+          { text: `${value.toFixed(1)} µg/m³`, strong: true },
+          { text: `${s.name} · ${fmtDay(day)}`, color }
+        ]);
+      });
+      hit.addEventListener('blur', hideTip);
+
+      svg.appendChild(hit);
+      facet.appendChild(svg);
+      host.appendChild(facet);
+    }
+  }
+
+  // ---------------------------------------------------------------- table
+
+  function renderTable() {
+    const table = document.getElementById('table');
+    table.textContent = '';
+
+    const names = Object.keys(history.cities).sort();
+    const allDays = [...new Set(names.flatMap(n => Object.keys(history.cities[n])))]
+      .sort().slice(-days).reverse();
+
+    const head = document.createElement('tr');
+    for (const label of ['Date', ...names]) {
+      const th = document.createElement('th');
+      th.scope = 'col';
+      th.textContent = label;
+      head.appendChild(th);
+    }
+    const thead = document.createElement('thead');
+    thead.appendChild(head);
+    table.appendChild(thead);
+
+    const body = document.createElement('tbody');
+    for (const day of allDays) {
+      const tr = document.createElement('tr');
+      const th = document.createElement('th');
+      th.scope = 'row';
+      th.textContent = fmtDay(day);
+      tr.appendChild(th);
+      for (const name of names) {
+        const td = document.createElement('td');
+        const v = history.cities[name][day];
+        td.textContent = v == null ? '—' : v.toFixed(1);
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    }
+    table.appendChild(body);
+  }
+
   // ---------------------------------------------------------------- wiring
 
   function renderAll() {
     renderLede();
     renderBars();
+    renderTrends();
+    renderTable();
   }
+
+  document.getElementById('range').addEventListener('click', ev => {
+    const btn = ev.target.closest('button');
+    if (!btn) return;
+    days = Number(btn.dataset.days);
+    for (const b of ev.currentTarget.querySelectorAll('button')) {
+      const on = b === btn;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', String(on));
+    }
+    renderTrends();
+    renderTable();
+  });
+
+  const tableToggle = document.getElementById('table-toggle');
+  tableToggle.addEventListener('click', () => {
+    const card = document.getElementById('table-card');
+    const open = card.hasAttribute('hidden');
+    card.toggleAttribute('hidden', !open);
+    tableToggle.setAttribute('aria-expanded', String(open));
+  });
 
   document.getElementById('theme').addEventListener('click', () => {
     const root = document.documentElement;
@@ -237,8 +412,12 @@
     resizeTimer = setTimeout(renderBars, 150);
   });
 
-  fetch('data/latest.json').then(r => r.json()).then(l => {
+  Promise.all([
+    fetch('data/latest.json').then(r => r.json()),
+    fetch('data/history.json').then(r => r.json())
+  ]).then(([l, h]) => {
     latest = l;
+    history = h;
     const stamp = new Date(l.updated);
     document.getElementById('updated').textContent =
       stamp.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });

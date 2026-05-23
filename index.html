@@ -30,11 +30,31 @@
     <div class="tiles" id="tiles"></div>
   </section>
 
+  <div class="filters" role="group" aria-label="Time range">
+    <span class="filter-label">Trend window</span>
+    <div class="segmented" id="range">
+      <button type="button" data-days="30">30 days</button>
+      <button type="button" data-days="90" class="on" aria-pressed="true">90 days</button>
+    </div>
+    <button id="table-toggle" class="ghost" type="button" aria-expanded="false">Table view</button>
+  </div>
+
   <section class="card" aria-labelledby="now-h">
     <h2 id="now-h">Current PM2.5 by city</h2>
     <p class="note">Most recent hourly reading. Colour and label both carry the band.</p>
     <div id="bars" class="chart"></div>
     <ul class="scale-legend" id="band-legend"></ul>
+  </section>
+
+  <section class="card" aria-labelledby="trend-h">
+    <h2 id="trend-h">Daily average, city by city</h2>
+    <p class="note">Each panel shares one vertical scale, so heights compare directly. The dot marks the latest day.</p>
+    <div id="trends" class="facets"></div>
+  </section>
+
+  <section class="card" id="table-card" hidden aria-labelledby="table-h">
+    <h2 id="table-h">All readings</h2>
+    <div class="table-wrap"><table id="table"></table></div>
   </section>
 
 </main>
