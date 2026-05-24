@@ -1,0 +1,106 @@
+{
+ "cities": [
+  {
+   "city": "Ahmedabad",
+   "lat": 23.0225,
+   "lon": 72.5714,
+   "nitrogen_dioxide": 3.3,
+   "observed": "2026-05-24T07:00",
+   "ozone": 64.2,
+   "pm10": 15.5,
+   "pm2_5": 11.6
+  },
+  {
+   "city": "Bengaluru",
+   "lat": 12.9716,
+   "lon": 77.5946,
+   "nitrogen_dioxide": 10.3,
+   "observed": "2026-05-24T07:00",
+   "ozone": 71.2,
+   "pm10": 16.0,
+   "pm2_5": 13.6
+  },
+  {
+   "city": "Chennai",
+   "lat": 13.0827,
+   "lon": 80.2707,
+   "nitrogen_dioxide": 9.8,
+   "observed": "2026-05-24T07:00",
+   "ozone": 108.1,
+   "pm10": 29.5,
+   "pm2_5": 24.5
+  },
+  {
+   "city": "Delhi",
+   "lat": 28.6139,
+   "lon": 77.209,
+   "nitrogen_dioxide": 22.9,
+   "observed": "2026-05-24T07:00",
+   "ozone": 95.1,
+   "pm10": 618.3,
+   "pm2_5": 132.1
+  },
+  {
+   "city": "Hyderabad",
+   "lat": 17.385,
+   "lon": 78.4867,
+   "nitrogen_dioxide": 5.6,
+   "observed": "2026-05-24T07:00",
+   "ozone": 100.8,
+   "pm10": 20.3,
+   "pm2_5": 17.1
+  },
+  {
+   "city": "Jaipur",
+   "lat": 26.9124,
+   "lon": 75.7873,
+   "nitrogen_dioxide": 3.8,
+   "observed": "2026-05-24T07:00",
+   "ozone": 84.2,
+   "pm10": 367.4,
+   "pm2_5": 72.5
+  },
+  {
+   "city": "Kolkata",
+   "lat": 22.5726,
+   "lon": 88.3639,
+   "nitrogen_dioxide": 4.3,
+   "observed": "2026-05-24T07:00",
+   "ozone": 109.2,
+   "pm10": 45.4,
+   "pm2_5": 34.8
+  },
+  {
+   "city": "Lucknow",
+   "lat": 26.8467,
+   "lon": 80.9462,
+   "nitrogen_dioxide": 14.4,
+   "observed": "2026-05-24T07:00",
+   "ozone": 107.0,
+   "pm10": 340.9,
+   "pm2_5": 85.0
+  },
+  {
+   "city": "Mumbai",
+   "lat": 19.076,
+   "lon": 72.8777,
+   "nitrogen_dioxide": 5.8,
+   "observed": "2026-05-24T07:00",
+   "ozone": 63.6,
+   "pm10": 13.6,
+   "pm2_5": 9.8
+  },
+  {
+   "city": "Pune",
+   "lat": 18.5204,
+   "lon": 73.8567,
+   "nitrogen_dioxide": 5.5,
+   "observed": "2026-05-24T07:00",
+   "ozone": 62.1,
+   "pm10": 10.4,
+   "pm2_5": 7.6
+  }
+ ],
+ "source": "Open-Meteo air quality API",
+ "updated": "2026-05-24T07:00:00+05:30"
+}
