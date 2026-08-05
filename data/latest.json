@@ -4,103 +4,103 @@
    "city": "Ahmedabad",
    "lat": 23.0225,
    "lon": 72.5714,
-   "nitrogen_dioxide": 13.5,
-   "observed": "2026-08-04T07:00",
-   "ozone": 49.5,
-   "pm10": 52.8,
-   "pm2_5": 25.2
+   "nitrogen_dioxide": 12.1,
+   "observed": "2026-08-05T07:00",
+   "ozone": 50.5,
+   "pm10": 58.0,
+   "pm2_5": 26.7
   },
   {
    "city": "Bengaluru",
    "lat": 12.9716,
    "lon": 77.5946,
-   "nitrogen_dioxide": 12.5,
-   "observed": "2026-08-04T07:00",
-   "ozone": 44.4,
-   "pm10": 8.5,
-   "pm2_5": 5.9
+   "nitrogen_dioxide": 11.7,
+   "observed": "2026-08-05T07:00",
+   "ozone": 43.3,
+   "pm10": 12.9,
+   "pm2_5": 7.6
   },
   {
    "city": "Chennai",
    "lat": 13.0827,
    "lon": 80.2707,
-   "nitrogen_dioxide": 10.3,
-   "observed": "2026-08-04T07:00",
-   "ozone": 82.9,
-   "pm10": 25.8,
-   "pm2_5": 17.1
+   "nitrogen_dioxide": 14.9,
+   "observed": "2026-08-05T07:00",
+   "ozone": 69.7,
+   "pm10": 22.9,
+   "pm2_5": 15.5
   },
   {
    "city": "Delhi",
    "lat": 28.6139,
    "lon": 77.209,
-   "nitrogen_dioxide": 39.8,
-   "observed": "2026-08-04T07:00",
-   "ozone": 82.1,
-   "pm10": 44.0,
-   "pm2_5": 43.4
+   "nitrogen_dioxide": 43.0,
+   "observed": "2026-08-05T07:00",
+   "ozone": 96.0,
+   "pm10": 58.2,
+   "pm2_5": 54.5
   },
   {
    "city": "Hyderabad",
    "lat": 17.385,
    "lon": 78.4867,
-   "nitrogen_dioxide": 9.9,
-   "observed": "2026-08-04T07:00",
-   "ozone": 52.7,
-   "pm10": 16.3,
-   "pm2_5": 10.8
+   "nitrogen_dioxide": 8.9,
+   "observed": "2026-08-05T07:00",
+   "ozone": 54.9,
+   "pm10": 11.8,
+   "pm2_5": 8.5
   },
   {
    "city": "Jaipur",
    "lat": 26.9124,
    "lon": 75.7873,
-   "nitrogen_dioxide": 10.2,
-   "observed": "2026-08-04T07:00",
-   "ozone": 71.2,
-   "pm10": 35.3,
-   "pm2_5": 20.5
+   "nitrogen_dioxide": 11.3,
+   "observed": "2026-08-05T07:00",
+   "ozone": 68.5,
+   "pm10": 97.4,
+   "pm2_5": 35.5
   },
   {
    "city": "Kolkata",
    "lat": 22.5726,
    "lon": 88.3639,
-   "nitrogen_dioxide": 8.1,
-   "observed": "2026-08-04T07:00",
-   "ozone": 78.7,
-   "pm10": 28.5,
-   "pm2_5": 23.4
+   "nitrogen_dioxide": 10.8,
+   "observed": "2026-08-05T07:00",
+   "ozone": 81.6,
+   "pm10": 30.8,
+   "pm2_5": 28.2
   },
   {
    "city": "Lucknow",
    "lat": 26.8467,
    "lon": 80.9462,
-   "nitrogen_dioxide": 13.2,
-   "observed": "2026-08-04T07:00",
-   "ozone": 83.7,
-   "pm10": 28.0,
-   "pm2_5": 26.9
+   "nitrogen_dioxide": 13.4,
+   "observed": "2026-08-05T07:00",
+   "ozone": 75.1,
+   "pm10": 18.1,
+   "pm2_5": 17.5
   },
   {
    "city": "Mumbai",
    "lat": 19.076,
    "lon": 72.8777,
-   "nitrogen_dioxide": 6.4,
-   "observed": "2026-08-04T07:00",
-   "ozone": 58.0,
-   "pm10": 41.6,
-   "pm2_5": 18.4
+   "nitrogen_dioxide": 7.2,
+   "observed": "2026-08-05T07:00",
+   "ozone": 55.2,
+   "pm10": 37.0,
+   "pm2_5": 16.2
   },
   {
    "city": "Pune",
    "lat": 18.5204,
    "lon": 73.8567,
-   "nitrogen_dioxide": 6.9,
-   "observed": "2026-08-04T07:00",
-   "ozone": 49.4,
-   "pm10": 14.0,
-   "pm2_5": 7.5
+   "nitrogen_dioxide": 6.6,
+   "observed": "2026-08-05T07:00",
+   "ozone": 44.8,
+   "pm10": 10.7,
+   "pm2_5": 5.8
   }
  ],
  "source": "Open-Meteo air quality API",
- "updated": "2026-08-04T07:00:00+05:30"
+ "updated": "2026-08-05T07:00:00+05:30"
 }
